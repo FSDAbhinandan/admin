@@ -10,12 +10,13 @@ public class FlightList {
 	private String arrivalTime;
 	private int totalSeats;
 	private int ticketCost;
+	private boolean block = false;
 	public FlightList() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public FlightList(int airlineId, String airlineName, String fromLocation, String toLocation, String departureTime,
-			String arrivalTime, int totalSeats, int ticketCost) {
+			String arrivalTime, int totalSeats, int ticketCost, boolean block) {
 		super();
 		this.airlineId = airlineId;
 		this.airlineName = airlineName;
@@ -25,6 +26,7 @@ public class FlightList {
 		this.arrivalTime = arrivalTime;
 		this.totalSeats = totalSeats;
 		this.ticketCost = ticketCost;
+		this.block=block;
 	}
 	public int getAirlineId() {
 		return airlineId;
@@ -53,7 +55,7 @@ public class FlightList {
 	public String getDepartureTime() {
 		return departureTime;
 	}
-	public void setDepartureTime(String departureTime) {
+	public void setDepartureTime(String departureTime){
 		this.departureTime = departureTime;
 	}
 	public String getArrivalTime() {
@@ -73,6 +75,12 @@ public class FlightList {
 	}
 	public void setTicketCost(int ticketCost) {
 		this.ticketCost = ticketCost;
+	}
+	public boolean isBlock() {
+		return block;
+	}
+	public void setBlock(boolean block) {
+		this.block = block;
 	}
 	
 	
