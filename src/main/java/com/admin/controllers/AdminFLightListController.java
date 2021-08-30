@@ -67,11 +67,42 @@ public class AdminFLightListController {
 	
 //	Block The Flight
 	
-	@PutMapping("/flights/{id}")
+	@PutMapping("/flights/{id}/block")
 	public FlightList blockFlight(@PathVariable("id") int id) {
+		System.out.println("Inside Admin ");
 		ResponseEntity<FlightList> blockUnblock = template.exchange(
-				"http://localhost:9092/flights"+"/"+"{id}",
-		          HttpMethod.DELETE,
+				"http://localhost:9092/flights"+"/"+"{id}"+"/block",
+		          HttpMethod.PUT,
+		          null,
+		          FlightList.class,
+		          Integer.toString(id)
+				);
+		return blockUnblock.getBody();
+	}
+	
+	//UnBlock Flight
+	@PutMapping("/flights/{id}/unblock")
+	public FlightList unBlockFlight(@PathVariable("id") int id) {
+		System.out.println("Inside Admin ");
+		ResponseEntity<FlightList> blockUnblock = template.exchange(
+				"http://localhost:9092/flights"+"/"+"{id}"+"/unblock",
+		          HttpMethod.PUT,
+		          null,
+		          FlightList.class,
+		          Integer.toString(id)
+				);
+		return blockUnblock.getBody();
+	}
+	
+	
+//	Edit flight
+	
+	@PutMapping("/flights/{id}/edit")
+	public FlightList editFlight(@PathVariable("id") int id, @RequestBody FlightList flightList) {
+		System.out.println("Inside Admin ");
+		ResponseEntity<FlightList> blockUnblock = template.exchange(
+				"http://localhost:9092/flights"+"/"+"{id}"+"/edit",
+		          HttpMethod.PUT,
 		          null,
 		          FlightList.class,
 		          Integer.toString(id)
