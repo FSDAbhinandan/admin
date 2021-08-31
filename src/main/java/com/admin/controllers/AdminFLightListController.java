@@ -2,6 +2,7 @@ package com.admin.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.admin.entity.Coupon;
 import com.admin.entity.FlightList;
+import com.admin.services.CouponService;
 
 @RestController
 @RequestMapping("/admin")
@@ -24,6 +27,9 @@ import com.admin.entity.FlightList;
 public class AdminFLightListController {
 	
 	RestTemplate template = new RestTemplate();
+	
+	@Autowired
+	private CouponService couponService;
 	
 
 	@GetMapping("/flights")
@@ -108,5 +114,24 @@ public class AdminFLightListController {
 		          Integer.toString(id)
 				);
 		return blockUnblock.getBody();
+	}
+	
+	
+	//Coupon
+	
+	@PostMapping("/addcoupon")
+	public Coupon addCoupon(@RequestBody Coupon coupon) {
+		return this.couponService.addCoupon(coupon);
+	}
+	
+	@GetMapping("/getcoupons")
+	public List<Coupon> getAllCoupon() {
+		return this.couponService.getAllCoupon();
+	}
+	
+	//Deleting Coupon
+	@DeleteMapping("/delete/{id}")
+	public void deleteCoupon(@PathVariable("id") int id) {
+		this.couponService.deleteCoupon(id);
 	}
 }
